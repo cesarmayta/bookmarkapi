@@ -2,20 +2,16 @@
 API Rest for Bookmarks
 TEST for Keeper Solutions
 
-#HOW TO DEPLOY
-1 - clone the repository
-2 - create an virtual env and activated
-    python -m venv venv
-    source venv/scripts/activate
-3 - install dependencies
-    pip install -r requirements.txt
-4 - create database and tables
-    python manage.py makemigrations
-    python manage.py migrate
-5 - create an admin user
-    python manage.py createsuperuser
-6 - deploy the project
-    python manage.py runserver
+#HOW TO DEPLOY<br>
+<ol>
+    <li>clone the repository : git clone https://github.com/cesarmayta/bookmarkapi.git</li>
+    <li>create an virtual env and activated : python -m venv venv
+    source venv/scripts/activate</li>
+    <li>install dependencies : pip install -r requirements.txt</li>
+    <li>create database and tables : python manage.py migrate</li>
+    <li>create an admin user : python manage.py createsuperuser</li>
+    <li>deploy the project : python manage.py runserver</li>
+</ol>
 
 #PRINCIPAL END POINT
 # for see public bookmarks
