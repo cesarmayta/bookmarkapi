@@ -21,10 +21,16 @@ class PublicBookmarkView(APIView):
     def get(self,request):
         BookmarkData = Bookmark.objects.filter(access='public')
         BookmarkSer = BookmarkSerializer(BookmarkData,many=True)
-        context = {
-            'ok':True,
-            'content':BookmarkSer.data
-        }
+        if BookmarkSer.data != [] :
+            context = {
+                'ok':True,
+                'content':BookmarkSer.data
+            }
+        else:
+             context = {
+                'ok':True,
+                'content':'no bookmark are available.'
+            }
         return Response(context)
 
 class BookmarkView(APIView):
