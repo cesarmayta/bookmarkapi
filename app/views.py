@@ -6,6 +6,8 @@ from .serializers import *
 
 from rest_framework.permissions import IsAuthenticated
 
+from django.contrib.auth.models import User
+
 class indexView(APIView):
     
     def get(self,request):
@@ -35,7 +37,7 @@ class PublicBookmarkView(APIView):
 
 class BookmarkView(APIView):
     
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     
     def get(self,request):
         BookmarkData = Bookmark.objects.all()
@@ -47,7 +49,18 @@ class BookmarkView(APIView):
         return Response(context)
     
     def post(self,request):
-        BookmarkSer = BookmarkSerializer(data=request.data)
+        userId = request.user.id
+        #print("user id : " + str(userId))
+        bookmarkData = {
+            'title': request.data['title'],
+            'url': request.data['url'],
+            #'create_at': request.data['create_at'],
+            'access': request.data['access'],
+            'user': userId
+        }
+        #bookmarkData = request.data
+        #print(bookmarkData)
+        BookmarkSer = BookmarkSerializer(data=bookmarkData)
         BookmarkSer.is_valid(raise_exception=True)
         BookmarkSer.save()
         

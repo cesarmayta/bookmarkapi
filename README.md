@@ -19,7 +19,13 @@ http://localhost:8000/publicbookmark
 
 #for manage bookmarks
 
-http://localhost:8000/bookmark - ACCEPT GET AND POST METHODS WITH BASIC AUTHENTICATION
+http://localhost:8000/bookmark - ACCEPT GET AND POST METHODS WITH BASIC AUTHENTICATION<br>
+JSON FORMAT FOR POST
+<p>{
+        "title": "new bookmark",
+        "url": "https://cesarmayta.github.io/",
+        "access": "public"
+    }</p>
 
 
 http://localhost:8000/bookmark/bookmarkId - ACCEPT PUT AND DELETE METHODS WITH BASIC AUTHENTICATION

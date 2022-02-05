@@ -9,6 +9,10 @@ from .models import *
 
 from django.urls import reverse
 
+
+from rest_framework import status
+from rest_framework.test import APITestCase
+
 # Create your tests here.
 class BookmarkModelTests(TestCase):
     
@@ -67,3 +71,21 @@ class BookmarkViewTests(TestCase):
         """ bookmark with future create_at no publish y response"""
         response = self.client.get(reverse("app:publicbookmark"))
         self.assertContains(response,"no bookmark are available.")
+        
+class BookmarkAPIViewTests(APITestCase):
+    def test_bookmark_post(self):
+        """
+        Ensure we can create a new bookmark object from post method.
+        """
+        user1 = User.objects.create_user(username='admin', password='admin')
+        url = reverse('app:bookmark')
+        data = {
+            'title': 'new bookmark',
+            'url': 'http://www.google.com',
+            'access': 'public',
+            'user': '1'
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(Bookmark.objects.count(), 1)
+        self.assertEqual(Bookmark.objects.get().title, 'new bookmark')
